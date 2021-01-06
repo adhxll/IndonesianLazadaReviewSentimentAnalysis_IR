@@ -1,0 +1,5 @@
+search_tweets_api:
+  account_type: enterprise
+  endpoint: <FULL_URL_OF_ENDPOINT>
+  username: <USERNAME>
+  password: <PW>
