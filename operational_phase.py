@@ -27,9 +27,7 @@ def load_database():
   return df
 
 def search(df, col, query):
-    # query = "%" + query + "%"
-
-    return df[df[col].str.contains(query)]
+  return df[df[col].str.contains(query.lower())]
 
 
 def predict_sentiment(df):
@@ -79,13 +77,15 @@ if __name__ == "__main__":
   df = load_database()
   col = 'reviews'
   df = search(df,col,user_input)
-  data = predict_sentiment(df)
 
-  pos, neg, neutral = count(data)
-  print()
-  print("==============HASIL==============")
-  print("ULASAN POSITIF : "+str(pos)+"%")
-  print("ULASAN NEGATIF : "+str(neg)+"%")
-  print("ULASAN NETRAL  : "+str(neutral)+"%")
-
-  #insert method to count positive, neutral, and negative
+  if df.shape[0]==0:
+    print()
+    print("Produk yang kamu cari tidak ada!")
+  else:
+    data = predict_sentiment(df)
+    pos, neg, neutral = count(data)
+    print()
+    print("==============HASIL==============")
+    print("ULASAN POSITIF : "+str(pos)+"%")
+    print("ULASAN NEGATIF : "+str(neg)+"%")
+    print("ULASAN NETRAL  : "+str(neutral)+"%")
